@@ -72,7 +72,9 @@ int main() {
         dequeue(outFile);
     }
 
-    printf("\nStudents with GPA < 9:");
+    printf("\n\nStudents with GPA < 9:");
+    fprintf(outFile, "\n\nStudents with GPA < 9:");
+    
     for (int i = 0; i < j; i++) {
         printf("\n%s", gpastorage[i]);
         fprintf(outFile, "\n%s", gpastorage[i]);
