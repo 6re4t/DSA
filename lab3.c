@@ -3,46 +3,39 @@
 #include <string.h>
 
 #define SIZE 5
-#define MAX_STRING_LENGTH 100
 
-int front = -1;
-int rear = -1;
+int front = 2;
+int rear = 2;
 char inp_array[SIZE][100];
-char gpastorage[SIZE][5]; // Increased size to store a null terminator
+char gpastorage[SIZE][5];
 int j = 0;
 int temp = 0;
 
 void enqueue(char inp[100]) {
-    if (rear == SIZE - 1) {
+    
+    if (rear == SIZE - 1) {        //circular queue reset
         rear = -1;
     }
-
+    
     rear = rear + 1;
     strcpy(inp_array[rear], inp);
 }
 
 void dequeue(FILE *outFile) {
-    if (front == -1) {
-        printf("Queue is empty\n");
-        return;
-    }
 
     char gpa[20];
-    strncpy(gpa, inp_array[front] + 26, 4);
+    strncpy(gpa, inp_array[front] + 26, 4);            //jumping to gpa in each array
     float gpaint = atof(gpa);
 
     if (gpaint < 9) {
-        strncpy(gpastorage[j], inp_array[front] + 12, 4);
+        strncpy(gpastorage[j], inp_array[front] + 12, 4);    //collecting names of students below 9 GPA
         j++;
     }
 
     fprintf(outFile, "%s", inp_array[front]);
     printf("%s", inp_array[front]);
-
-    if (front == rear) {
-        // Queue has only one element
-        front = rear = -1;
-    } else if (front == SIZE - 1) {
+    
+    if (front == SIZE - 1) {            //circular queue reset
         front = 0;
     } else {
         front = front + 1;
@@ -52,6 +45,7 @@ void dequeue(FILE *outFile) {
 }
 
 int main() {
+    int front = -1;
     char a[100];
     FILE *fptr = fopen("studentin.dat", "r");
     FILE *outFile = fopen("studentout.dat", "w");
@@ -67,17 +61,16 @@ int main() {
 
     fclose(fptr);
 
-    // Dequeue and process, printing everything
-    while (temp < 5) {
+    while (temp < SIZE) {
         dequeue(outFile);
     }
 
-    printf("\n\nStudents with GPA < 9:");
-    fprintf(outFile, "\n\nStudents with GPA < 9:");
+    printf("\nStudents with GPA < 9:\n");
+    fprintf(outFile, "\nStudents with GPA < 9:\n");
     
     for (int i = 0; i < j; i++) {
-        printf("\n%s", gpastorage[i]);
-        fprintf(outFile, "\n%s", gpastorage[i]);
+        printf("%s\n", gpastorage[i]);
+        fprintf(outFile, "%s\n", gpastorage[i]);            //printing names of students below 9 GPA
     }
 
     fclose(outFile);
