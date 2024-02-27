@@ -4,8 +4,8 @@
 
 #define SIZE 5
 
-int front = 2;
-int rear = 2;
+int front = 0;
+int rear = -1;
 char inp_array[SIZE][100];
 char gpastorage[SIZE][5];
 int j = 0;
