@@ -112,6 +112,7 @@ int main() {
         i++;
         elementsint[i] = atoi(token);
     }
+    free(elements);
 
     FILE *outFile = fopen("linearSearchResults.txt", "w");
     if (outFile == NULL) {
@@ -128,6 +129,7 @@ int main() {
     }
     binarySearch(size, elementsint, num, outFile2);
     fclose(outFile2);
+    free(elementsint);
 
     return 0;
 }
