@@ -104,7 +104,7 @@ int main() {
     }
     fclose(fptr2);
 
-    int *elementsint = (int *)malloc(491520 * sizeof(int));
+    int *elementsint = (int *)malloc(500000 * sizeof(int));
     int i = 0;
     char *token = strtok(elements, " ");
     elementsint[0] = atoi(token);
